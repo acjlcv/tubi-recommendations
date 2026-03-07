@@ -2,6 +2,6 @@
 .history
 
 *.md
-./rules
+rules/
 
-./website/
+website/
