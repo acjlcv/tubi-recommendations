@@ -1,0 +1,21 @@
+training:
+  batch_size: 64
+  epochs: 500
+  learning_rate: 0.0001
+  train_ratio: 0.8
+  val_ratio: 0.1
+  test_ratio: 0.1
+
+model:
+  num_genres: 27
+  num_keywords: 5
+  num_languages: 12
+  num_metrics: 5
+  hidden_dim: 512
+  embedding_dim: 256
+
+data:
+  path: "./data/process/tubi_processed.csv"
+
+save:
+  path: "./model/savepoints/intrinsic_model.pt"

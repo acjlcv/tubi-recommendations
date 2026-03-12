@@ -1,0 +1,20 @@
+training:
+  batch_size: 64
+  epochs: 500
+  learning_rate: 0.001
+  train_ratio: 0.8
+  val_ratio: 0.1
+  test_ratio: 0.1
+
+model:
+  history_length: 30
+  hidden_dim: 512
+  embedding_dim: 256
+  user_size: 1000
+  num_negatives: 5
+
+data:
+  content_path: "./data/process/tubi_processed.csv"
+
+save:
+  path: "./model/savepoints/extrinsic_model.pt"

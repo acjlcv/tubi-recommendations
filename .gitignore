@@ -1,7 +1,17 @@
 .DS_Store
 .history
+.venv/
 
+.ruff_cache/
+
+#avoid adding opencode instructions into repo
 *.md
-rules/
+.opencode/
 
+#frontend in separate repo
 website/
+
+#any keys will be named with .private
+*private.py
+
+*__pycache__/
