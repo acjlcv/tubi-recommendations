@@ -78,3 +78,9 @@ Overall learned a lot about system design and different types of recommendation 
 
 I think there was a lack of data to do anything substantial. Maybe I can find a better dataset. However, it was a good learning experience about recommendation systems.
 
+### References
+
+* **GeeksforGeeks.** (2025, December 27). *What are Recommender Systems?* GeeksforGeeks. Retrieved from [https://www.geeksforgeeks.org/machine-learning/what-are-recommender-systems/](https://www.geeksforgeeks.org/machine-learning/what-are-recommender-systems/)
+* **Leone Maria, G.** (2021). *Neural-Network-for-Recommendation-Systems* [Source code]. GitHub. Retrieved from [https://github.com/GiacomoLeoneMaria/Neural-Network-for-Recommendation-Systems](https://github.com/GiacomoLeoneMaria/Neural-Network-for-Recommendation-Systems)
+* **Murrell, T.** (2025, May 9). *The Two-Tower Model for Recommendation Systems: A Deep Dive.* Shaped AI Blog. Retrieved from [https://www.shaped.ai/blog/the-two-tower-model-for-recommendation-systems-a-deep-dive](https://www.shaped.ai/blog/the-two-tower-model-for-recommendation-systems-a-deep-dive)
+* **NVIDIA Glossary.** (n.d.). *What is a Recommendation System?* NVIDIA. Retrieved from [https://www.nvidia.com/en-us/glossary/recommendation-system/](https://www.nvidia.com/en-us/glossary/recommendation-system/)
