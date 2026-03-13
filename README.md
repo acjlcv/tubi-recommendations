@@ -39,11 +39,13 @@ Some of the data is missing and I've tried my best to fill these NaN values with
 
 ## Model Architecture
 
-Two-stage training with two towers system.
+Two-stage training with two towers system. Something like this:
+
+![](./static/shaped_ai_two_tower_graphic.jpg)
 
 The intrinsic evaluator (for objective scores about each media, such as average user ratings, number of user ratings, etc.) trains a content encoder by passing the content encoder embeddings through a MLP that is trained to predict popularity. This predicted popularity score is then compared to the actual raw data popularity scores using Mean Square Error Loss (MSE Loss) and backpropogated based on this loss function.
 
-The extrinsic evaluator (for user related data) trains the user encoder and outputs a user embedding, which is later used in the inference two towers system to calculate a recommendation score. In order to have a watch history for each user in the dataset, I had to first train the content encoder first and then use that content encoder to create the watch history content embeddings that are used to train the user encoder. The user encoder was trained using mean watch history embedded vectors as the ground truth and MSE loss.
+The extrinsic evaluator (for user related data) trains the user encoder and outputs a user embedding, which is later used in the inference two towers s ystem to calculate a recommendation score. In order to have a watch history for each user in the dataset, I had to first train the content encoder first and then use that content encoder to create the watch history content embeddings that are used to train the user encoder. The user encoder was trained using mean watch history embedded vectors as the ground truth and MSE loss.
 
 The recommendation engine takes the dot product between al0l item_embeddings and the user embedding, and then find the top_k similarity scores to be used in a weighted recommendation score calculation. I personally used 0.7 for similarity scores and 0.3 for predicted popularity scores.
 
@@ -62,10 +64,10 @@ Other architectures I've considered, but did not have time to implement for the 
 
 ## Findings
 Here's the content/intrinsic evaluator tower training and validation loss.
-![](./model/savepoints/intrinsic_model_loss.png)
+![](./static/intrinsic_model_loss.png)
 
 Here's the user/extrinsic evaluator tower training and validation loss.
-![](./model/savepoints/extrinsic_model_loss.png)
+![](./static/extrinsic_model_loss.png)
 
 
 ## Notes
