@@ -2,6 +2,7 @@ import argparse
 import os
 
 import torch
+import torch.nn as nn
 import yaml
 from torch.nn import MSELoss
 from torch.optim import Adam
@@ -14,7 +15,6 @@ from data.content_dataset import ContentDataset
 from data.user_dataset import UserDataset
 from model.embeddings import ContentEncoder
 from model.extrinsic import ExtrinsicEvaluator
-
 
 def create_item_embeddings(
     content_dataset: ContentDataset,
@@ -43,7 +43,8 @@ def get_history_embeddings(
     indices: torch.Tensor,
     item_embeddings: torch.Tensor,
 ) -> torch.Tensor:
-    return item_embeddings[indices]
+    l = item_embeddings[indices]
+    return l
 
 
 def main():
@@ -91,6 +92,11 @@ def main():
         output_dim=embedding_dim,
     ).to(device)
 
+    ckpt = torch.load("./model/savepoints/intrinsic_model.pt", map_location=device)
+    content_encoder.load_state_dict(
+        ckpt, strict=False
+    )  # since content encoder is trained inside intrinsic evaluator
+
     item_embeddings = create_item_embeddings(content_dataset, content_encoder, device)
     print(f"Computed embeddings for {num_items} items, shape: {item_embeddings.shape}")
 
@@ -118,7 +124,9 @@ def main():
         embedding_dim=embedding_dim,
     ).to(device)
 
-    optimizer = Adam(model.parameters(), lr=learning_rate)
+    optimizer = Adam(
+        list(model.parameters()), lr=learning_rate
+    )
     criterion = MSELoss()
 
     train_losses = []
@@ -237,6 +245,11 @@ def main():
     plt.title("Training vs Validation Loss")
     plt.legend()
     plt.tight_layout()
+
+    plot_path = save_path.replace(".pt", "_loss.png")
+    plt.savefig(plot_path)
+    print(f"Loss plot saved to {plot_path}")
+    plt.close()
 
     os.makedirs(os.path.dirname(save_path), exist_ok=True)
     torch.save(model.state_dict(), save_path)

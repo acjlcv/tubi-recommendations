@@ -18,10 +18,10 @@ class ExtrinsicEvaluator(nn.Module):  # two towers
         )
 
         self.output_mlp = nn.Sequential(
-            nn.Linear(embedding_dim, 512),
+            nn.Linear(embedding_dim, hidden_dim),
             nn.ReLU(),
             nn.Dropout(0.1),
-            nn.Linear(512, embedding_dim),
+            nn.Linear(hidden_dim, embedding_dim),
         )
 
     def forward(

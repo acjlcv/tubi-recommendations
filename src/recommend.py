@@ -96,6 +96,9 @@ class RecommendationEngine:
                 torch.load(intrinsic_model_path, map_location=self.device)
             )
             self.intrinsic_model.eval()
+            self.content_encoder.load_state_dict(
+                self.intrinsic_model.content_encoder.state_dict()
+            )
         else:
             print(f"Warning: Intrinsic model not found at {intrinsic_model_path}")
             self.intrinsic_model = None
@@ -145,11 +148,17 @@ class RecommendationEngine:
         user_embedding: torch.Tensor,
         top_k: int = 10,
     ) -> tuple[torch.Tensor, torch.Tensor]:
+
         similarities = F.cosine_similarity(
             user_embedding.unsqueeze(0),
             self.item_embeddings,
             dim=1,
         )
+
+        # similarities = torch.matmul(
+        #     user_embedding.squeeze(0),
+        #     self.item_embeddings.T
+        # ).squeeze(0)
 
         top_scores, top_indices = torch.topk(similarities, k=min(top_k, self.num_items))
 
